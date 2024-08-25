@@ -1,4 +1,4 @@
-name: gaussian_splatting
+name: Grendel-GS
 channels:
   - pytorch
   - nvidia
@@ -11,7 +11,7 @@ dependencies:
   - tqdm
   - psutil
   - pytorch=2.0.1
-  - pytorch-cuda=11.7
+  - pytorch-cuda=11.8
   - torchvision=0.15.2
   - setuptools=69.1.1
   - mkl==2024.0
