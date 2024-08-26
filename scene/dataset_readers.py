@@ -119,8 +119,14 @@ def readColmapCameras(cam_extrinsics, cam_intrinsics, images_folder):
                 False
             ), "Colmap camera model not handled: only undistorted datasets (PINHOLE or SIMPLE_PINHOLE cameras) supported!"
 
-        image_path = os.path.join(images_folder, os.path.basename(extr.name))
-        image_name = os.path.basename(image_path).split(".")[0]
+        cam_name_split = extr.name.split("/")
+        if len(cam_name_split) > 1:
+            single_cam_folder = cam_name_split[0]
+            img_name = cam_name_split[1]
+            image_path = os.path.join(images_folder, single_cam_folder, img_name)
+        else:
+            image_path = os.path.join(images_folder, os.path.basename(extr.name))
+        image_name = extr.name
         image = Image.open(
             image_path
         )  # this is a lazy load, the image is not loaded yet

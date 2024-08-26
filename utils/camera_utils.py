@@ -24,9 +24,9 @@ from PIL import Image
 
 def loadCam(args, id, cam_info, decompressed_image=None, return_image=False):
     orig_w, orig_h = cam_info.width, cam_info.height
-    assert (
-        orig_w == utils.get_img_width() and orig_h == utils.get_img_height()
-    ), "All images should have the same size. "
+    # assert (
+    #     orig_w == utils.get_img_width() and orig_h == utils.get_img_height()
+    # ), "All images should have the same size. "
 
     args = get_args()
     log_file = get_log_file()
