@@ -196,7 +196,7 @@ def storePly(path, xyz, rgb):
     ply_data.write(path)
 
 
-def readColmapSceneInfo(path, images, eval, llffhold=20):
+def readColmapSceneInfo(path, images, eval, llffhold=20, skip_cams=["cam5"]):
     try:
         cameras_extrinsic_file = os.path.join(path, "sparse/0", "images.bin")
         cameras_intrinsic_file = os.path.join(path, "sparse/0", "cameras.bin")
@@ -215,6 +215,9 @@ def readColmapSceneInfo(path, images, eval, llffhold=20):
         images_folder=os.path.join(path, reading_dir),
     )
     cam_infos = sorted(cam_infos_unsorted.copy(), key=lambda x: x.image_name)
+
+    for skip_cam in skip_cams:
+        cam_infos = [cam for cam in cam_infos if skip_cam not in cam.image_name]
 
     if eval:
         train_cam_infos = [c for idx, c in enumerate(cam_infos) if idx % llffhold != 0]
