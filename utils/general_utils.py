@@ -12,7 +12,7 @@
 import torch
 from torch import nn
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 import numpy as np
 import random
 import os
@@ -198,7 +198,7 @@ def init_distributed(args):
     WORLD_SIZE = int(os.environ.get("WORLD_SIZE", 1))
     if WORLD_SIZE > 1:
         torch.distributed.init_process_group(
-            "nccl", rank=GLOBAL_RANK, world_size=WORLD_SIZE
+            "nccl", timeout=timedelta(seconds=3600), rank=GLOBAL_RANK, world_size=WORLD_SIZE
         )
         assert torch.cuda.is_available(), "Distributed mode requires CUDA"
         assert (

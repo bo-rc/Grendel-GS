@@ -30,7 +30,7 @@ def init(wish_host, wish_port):
     port = wish_port
     listener.bind((host, port))
     listener.listen()
-    listener.settimeout(0)
+    listener.settimeout(3600)
 
 
 def try_connect():
